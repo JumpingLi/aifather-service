@@ -1,0 +1,91 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "gradle.plugin.com.cuisongliu.plugin:mybatis-generator:0.9.6"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: "com.cuisongliu.plugin.mybatis-generator"
+
+group = 'com.iflytek'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+test.enabled = false
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    all*.exclude group: "org.apache.tomcat", module: "tomcat-jdbc"
+}
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.cloud:spring-cloud-starter-config:2.0.1.RELEASE')
+    compile('org.springframework.boot:spring-boot-starter-validation')
+    compile('org.springframework.boot:spring-boot-starter-data-redis')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.aspectj:aspectjrt')
+    compile('org.aspectj:aspectjweaver')
+    compile('com.google.guava:guava:23.0')
+    runtime('mysql:mysql-connector-java')
+    compile('com.zaxxer:HikariCP:3.2.0')
+//    swagger api
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
+
+    compileOnly('org.springframework.boot:spring-boot-configuration-processor')
+    compileOnly('org.projectlombok:lombok')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+//    testCompile('io.projectreactor:reactor-test')
+//    testCompile('org.springframework.security:spring-security-test')
+
+    compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8'
+
+    compile 'tk.mybatis:mapper-spring-boot-starter:2.0.0'
+    compile group: 'com.github.pagehelper', name: 'pagehelper-spring-boot-starter', version: '1.2.5'
+//    json 解析
+    compile group: 'com.alibaba', name: 'fastjson', version: '1.2.49'
+    compile group: 'org.json', name: 'json', version: '20180813'
+//    compile group: 'net.sf.json-lib', name: 'json-lib', version: '2.4'
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+
+
+
+}
+
+mbg {
+    overwrite = true
+    consoleable = true
+    jdbc {
+        driver = "com.mysql.jdbc.Driver"
+        url = "jdbc:mysql://127.0.0.1:3306/story_reading?characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;useSSL=false"
+        username = "root"
+        password = "Champion@2018"
+    }
+    xml {
+        resourcesProject = "src/main/java"
+//        mapperPlugin = MapperPlugin.class
+//        mapperMapper = "com.iflytek.netty.dao.mapper.BaseMapper"
+        mapperPackage = "com.iflytek.readingstory.dao.mapper"
+        modelPackage = "com.iflytek.readingstory.dao.entity"
+        xmlPackage = "com.iflytek.readingstory.dao.mapper"
+        tableName = " "
+        objectName = " "
+//        mapperSuffix = "Mapper"
+    }
+}

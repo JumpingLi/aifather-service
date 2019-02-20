@@ -1,0 +1,50 @@
+spring:
+  profiles:
+    active: dev
+  resources:
+    static-locations: ["file:${static.image-dir}","file:${static.acode-dir}","classpath:/static/"]
+static:
+  image-dir: /data/web/aifather/statics/images
+  acode-dir: /data/web/aifather/statics/acode
+#actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env,metrics,beans
+  endpoint:
+    health:
+      show-details: always
+#server
+server:
+  port: 8090
+  servlet:
+    context-path: /api
+#log
+debug: false
+logging:
+#  path:
+#  file: system.log
+  level:
+    com:
+      iflytek:
+        readingstory: DEBUG
+
+#  config:
+
+#mybatis
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath*:com/iflytek/readingstory/dao/mapper/*.xml
+  type-aliases-package: com.iflytek.readingstory.dao.entity
+#mapper
+mapper:
+  mappers: BaseMapper
+  not-empty: false
+  identity: MYSQL
+#pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

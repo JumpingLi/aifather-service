@@ -1,0 +1,47 @@
+#datasource
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    name: main
+    url: jdbc:mysql://192.168.57.101:3306/story_reading?characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: root
+    password: meap
+    hikari:
+      maximum-pool-size: 50
+      minimum-idle: 10
+      leak-detection-threshold: 16000
+      connection-timeout: 30000
+      connection-test-query: select 1 from dual
+      connection-init-sql: select 1 from dual
+      max-lifetime: 1800000
+      pool-name: DatebookHikariCP
+      idle-timeout: 30000
+      auto-commit: true
+  redis:
+    sentinel:
+      master: mymaster
+      nodes: 192.168.57.101:7505,192.168.57.101:7506
+    database: 0
+    timeout: 3000ms
+#sms
+sms:
+  sign:
+    id: 54
+  template:
+    id: 116916819812179
+#ls
+ls:
+  baseurl: https://open.xfliusheng.com/api
+  app:
+    id: p3HWxg4iZY
+    key: cec8d77528e9ef189cd0b26c057e313b
+  ptts:
+    spd: 40
+    vol: 50
+    pit: 50
+#mini program
+wechat:
+  mini-program:
+    app-id: wx677c23db7af3f7e5
+    secret: a7ec261ce673cf4c8977423d67bb066c
