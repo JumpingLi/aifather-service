@@ -42,7 +42,7 @@ public class DataConfig implements AsyncConfigurer {
     }
 
     /**
-     * 异步任务线程池
+     * 异步任务线程�?
      *
      * @return
      */
@@ -59,7 +59,7 @@ public class DataConfig implements AsyncConfigurer {
     }
 
     /**
-     * 参数校验器,满足之一则快速返回失败
+     * 参数校验�?,满足之一则快速返回失�?
      *
      * @return
      */
@@ -74,7 +74,7 @@ public class DataConfig implements AsyncConfigurer {
     }
 
     /**
-     * 校验 @RequestParam 的参数
+     * 校验 @RequestParam 的参�?
      *
      * @return
      */
